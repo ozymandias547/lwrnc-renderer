@@ -1,5 +1,7 @@
 "use strict";
 
+var fs = require('fs');
+
 // Converts HTML template into function that will populate
 // template with data from object passed and argument
 // and return HTML string
@@ -9,13 +11,31 @@
 //
 
 exports.compose = function(tmpStr, data) {
-
 	var fn = _compile(tmpStr);
 	return data ? fn(data) : fn;
-
 }
 
-function _compile(templateStr) {
+
+// Express method for app.engine()
+exports.renderFile = function(path, options, fn){
+  
+  if ('function' == typeof options) {
+    fn = options, options = {};
+  }
+
+  options.filename = path;
+
+  fs.readFile('views/lwrnc-template.html', 'utf8', function(err, data) {
+  	if (err) {
+  		fn(err);
+  		return;
+  	}
+  	fn(null, exports.compose(data, options));
+  });
+};
+
+
+function _compile(templateStr, options) {
 	var template = templateStr;
 
 	// Generate a reusable function that will serve as a template generator.
