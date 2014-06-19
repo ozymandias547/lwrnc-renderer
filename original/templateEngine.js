@@ -23,15 +23,6 @@
 		var template = templateStr;
 		// Generate a reusable function that will serve as a template generator.
 
-		if ( !/\s/.test(template) ) {
-			//Got ID not template string
-			template = document.getElementById(template);
-			
-			if (!template)
-				return null;
-			
-			template = template.innerHTML;
-		}
 		template = "var  _p_=[],_print_=function(){_p_.push.apply(_p_,arguments);}, _fillin_ = function(val){ return typeof val != 'undefined'?val:''}; _p_.push('" +
 					template.replace(/[\r\t\n\s]+/g, " ")
 							.replace(/'(?=[^%]*%>)/g,"\t")

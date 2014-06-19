@@ -15,8 +15,11 @@
 		</script>
 		<script src="templateEngine.js"></script>
 		<script>
+
+			var templateString = "<p>This is a <%=obj.kind%> template. To see if the <%=obj.name%> will work.</p>";
+
 			var targ = document.getElementById("target");
-			targ.innerHTML = templateEngine.compose("temp", {kind: "test", name: "_fillin_"});
+			targ.innerHTML = templateEngine.compose(templateString, {kind: "test", name: "_fillin_"});
 		</script>
 	</body>
 </html>
