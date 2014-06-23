@@ -25,7 +25,7 @@ exports.renderFile = function(path, options, fn){
 
   options.filename = path;
 
-  fs.readFile('views/lwrnc-template.html', 'utf8', function(err, data) {
+  fs.readFile(path, 'utf8', function(err, data) {
   	if (err) {
   		fn(err);
   		return;
